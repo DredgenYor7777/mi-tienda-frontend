@@ -16,7 +16,7 @@ export function Admin() {
     // ... (cargarProductos y handleChange siguen IGUAL) ...
     const cargarProductos = () => {
         /* ... tu código de fetch GET ... */
-        //fetch('http://localhost:3000/api/productos')
+        // YA ESTABA BIEN:
         fetch(`${API_URL}/api/productos`)
             .then(res => res.json())
             .then(data => setProductos(data))
@@ -61,21 +61,18 @@ export function Admin() {
         }
 
         try {
-            // Nota: Quitamos el header 'Content-Type': 'application/json'
-            // Fetch detecta automáticamente el FormData y pone el header correcto
-
             if (idEdicion) {
-                // PUT
-                await fetch(`http://localhost:3000/api/productos/${idEdicion}`, {
+                // PUT (CORREGIDO AQUI: Usar API_URL)
+                await fetch(`${API_URL}/api/productos/${idEdicion}`, {
                     method: 'PUT',
-                    body: formData, // <--- Enviamos el FormData
+                    body: formData, 
                 });
                 setIdEdicion(null);
             } else {
-                // POST
-                await fetch('http://localhost:3000/api/productos', {
+                // POST (CORREGIDO AQUI: Usar API_URL)
+                await fetch(`${API_URL}/api/productos`, {
                     method: 'POST',
-                    body: formData, // <--- Enviamos el FormData
+                    body: formData, 
                 });
             }
 
@@ -84,21 +81,25 @@ export function Admin() {
             setForm({ nombre: '', precio: '', descripcion: '', categoria: 'Ropa' });
             setArchivo(null); // Limpiamos el archivo
             setPreview(null); // Limpiamos la previsualización
-            // Importante: Limpiar también el input visualmente (truco rápido: reload o ref)
-            document.querySelector('input[type="file"]').value = "";
+            
+            // Limpiar el input file visualmente
+            const fileInput = document.querySelector('input[type="file"]');
+            if(fileInput) fileInput.value = "";
+            
             cargarProductos();
 
         } catch (error) {
             setMensaje("❌ Error al subir");
+            console.error(error);
         }
     };
 
-    // ... (eliminarProducto sigue IGUAL) ...
+    // ... (eliminarProducto CORREGIDO) ...
     const eliminarProducto = async (id) => {
-        /* ... tu código de delete ... */
         if (!window.confirm("¿Borrar?")) return;
         try {
-            await fetch(`http://localhost:3000/api/productos/${id}`, { method: 'DELETE' });
+            // DELETE (CORREGIDO AQUI: Usar API_URL)
+            await fetch(`${API_URL}/api/productos/${id}`, { method: 'DELETE' });
             setProductos(productos.filter(p => p.id !== id));
         } catch (e) { console.error(e); }
     };
@@ -145,7 +146,13 @@ export function Admin() {
                                         setPreview(URL.createObjectURL(file));
                                     }
                                 }}
-                                className="..."
+                                className="block w-full text-sm text-slate-500
+                                  file:mr-4 file:py-2 file:px-4
+                                  file:rounded-full file:border-0
+                                  file:text-sm file:font-semibold
+                                  file:bg-violet-50 file:text-violet-700
+                                  hover:file:bg-violet-100
+                                "
                             />
 
 
