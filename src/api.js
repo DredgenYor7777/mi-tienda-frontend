@@ -5,5 +5,7 @@
 // (Por ahora, vamos a forzar la de la nube para probar)
 
 export const API_URL = "https://api-mi-ecommerce.onrender.com"; 
+//local 
+//export const API_URL = "http://localhost:3000";
 // Ejemplo: "https://api-mi-ecommerce.onrender.com"
 // ¡IMPORTANTE! NO le pongas la barra al final (/), solo hasta .com
