@@ -59,21 +59,28 @@ useEffect(() => {
         )}
       </div>
       
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {productos.map((prod) => {
-          const cantidadEnCarrito = carrito.filter(item => item.id === prod.id).length;
+          
+          // 1. Buscamos si el producto ya está dentro del carrito
+          const itemEnCarrito = carrito.find(item => item.id === prod.id);
+          
+          // 2. Extraemos su cantidad real (si no está, es 0)
+          const cantidadActual = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+
           return (
             <TarjetaProducto 
               key={prod.id} 
               producto={prod}
-              cantidad={cantidadEnCarrito}
+              cantidad={cantidadActual} // <--- Pasamos la cantidad correcta
               alAgregar={() => manejarAgregar(prod)}
-              alQuitar={() => manejarQuitar(prod)}
-              esAdmin={esAdmin} // <--- 2. SE LO PASAMOS A LA TARJETA
+              alQuitar={() => manejarQuitar(prod.id)} // <--- Importante: Pasar solo el prod.id
+              esAdmin={esAdmin} 
             />
           );
         })}
       </div>
+      
     </div>
   );
 }
