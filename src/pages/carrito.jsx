@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { API_URL } from '../api';
 
 export function Carrito({ carrito = [], total = 0, manejarQuitar }) {
 
@@ -14,7 +15,7 @@ export function Carrito({ carrito = [], total = 0, manejarQuitar }) {
 
         try {
             // Le pedimos al backend que cree la "Caja Registradora" de Stripe
-            const response = await fetch('http://localhost:3000/api/crear-sesion-checkout', {
+            const response = await fetch(`${API_URL}/api/crear-sesion-checkout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -122,7 +122,7 @@ console.log("📡 Respuesta recibida del servidor. Status:", response.status);
     const cargarPedidos = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://localhost:3000/api/admin/pedidos', {
+            const response = await fetch('${API_URL}/api/admin/pedidos', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -137,7 +137,7 @@ console.log("📡 Respuesta recibida del servidor. Status:", response.status);
     const marcarComoEnviado = async (id) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/pedidos/${id}/estado`, {
+            const response = await fetch(`${API_URL}/api/admin/pedidos/${id}/estado`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
