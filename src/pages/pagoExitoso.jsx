@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { API_URL } from './api';
+import { API_URL } from '../api';
 
 export function PagoExitoso({ vaciarCarrito }) {
     // Esto nos permite leer el "?session_id=..." de la URL
