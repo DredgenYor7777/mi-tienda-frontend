@@ -18,7 +18,7 @@ export function PagoExitoso({ vaciarCarrito }) {
             if (sessionId) {
                 const token = localStorage.getItem('token');
                 try {
-                    const response = await fetch('http://localhost:3000/api/confirmar-pago', {
+                    const response = await fetch(`${API_URL}/api/confirmar-pago`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
