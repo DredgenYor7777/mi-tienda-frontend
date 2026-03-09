@@ -30,6 +30,10 @@ function App() {
     // 👇 NUEVO: Destruir el carrito al salir
     localStorage.removeItem("mi-carrito");
     setRol(null);
+
+    // 👇 NUEVO: Vaciamos la memoria de React antes de que el navegador tome la foto
+    setCarrito([]);
+    
     window.location.href = "/"; // Limpieza total
   };
 
