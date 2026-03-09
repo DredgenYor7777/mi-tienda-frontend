@@ -31,6 +31,10 @@ export function PagoExitoso({ vaciarCarrito }) {
                     if (response.ok) {
                         console.log("¡El backend confirmó el pago! ✅");
                         setConfirmado(true);
+
+                        // 👇 EL SEGURO: Volvemos a barrer la pantalla una vez
+                        // que la carrera de peticiones terminó por completo.
+                        vaciarCarrito();
                     }
                 } catch (error) {
                     console.error("Error al confirmar con el backend", error);
